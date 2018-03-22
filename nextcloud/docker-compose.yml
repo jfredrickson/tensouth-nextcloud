@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  app:
+  db:
+
+services:
+  db:
+    build: ./db
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    restart: unless-stopped
+  app:
+    image: nextcloud:fpm
+    depends_on:
+      - db
+    volumes:
+      - app:/var/www/html
+    env_file:
+      - .env
+    restart: unless-stopped
+  web:
+    build: ./web
+    ports:
+      - 4020:80
+    depends_on:
+      - app
+    volumes:
+      - app:/var/www/html:ro
+    restart: unless-stopped
