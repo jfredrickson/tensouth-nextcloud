@@ -24,7 +24,7 @@ services:
   web:
     build: ./web
     ports:
-      - 4020:80
+      - 8020:80
     depends_on:
       - app
     volumes:
