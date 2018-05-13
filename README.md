@@ -4,7 +4,7 @@ A Docker deployment of Nextcloud. This is modeled on [Nextcloud's docker-compose
 
 ## Setup
 
-First, configure the database username and password via the `.env` file. Use the `sample.env` file as a basis for creating the `.env` file.
+First, configure the database username and password via the `.env` file. Use the `example.env` file as a basis for creating the `.env` file.
 
 After the `.env` file is in place, build and deploy:
 
