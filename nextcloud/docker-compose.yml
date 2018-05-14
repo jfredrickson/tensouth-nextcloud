@@ -4,6 +4,13 @@ volumes:
   app:
   db:
 
+networks:
+  internal:
+    external: false
+  reverse-proxy:
+    external:
+      name: reverse-proxy
+
 services:
   db:
     build: ./db
@@ -12,6 +19,8 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - internal
   app:
     image: nextcloud:fpm
     depends_on:
@@ -21,12 +30,20 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - internal
   web:
     build: ./web
-    ports:
-      - 8020:80
     depends_on:
       - app
     volumes:
       - app:/var/www/html:ro
     restart: unless-stopped
+    networks:
+      - internal
+      - reverse-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.backend=nextcloud
+      - traefik.frontend.rule=Host:nextcloud2.tensouth.net
+      - traefik.docker.network=reverse-proxy
