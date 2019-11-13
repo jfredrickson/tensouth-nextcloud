@@ -45,7 +45,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.backend=nextcloud
-      - traefik.frontend.rule=Host:nextcloud2.tensouth.net
+      - traefik.frontend.rule=Host:nextcloud.tensouth.net
       - traefik.docker.network=reverse-proxy
       - traefik.frontend.headers.customFrameOptionsValue=SAMEORIGIN
       - traefik.frontend.headers.STSSeconds=15552000
