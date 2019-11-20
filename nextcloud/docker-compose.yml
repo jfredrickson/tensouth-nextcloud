@@ -25,10 +25,18 @@ services:
     image: nextcloud:fpm
     depends_on:
       - db
+      - redis
     volumes:
       - app:/var/www/html
+    environment:
+      - REDIS_HOST=redis
     env_file:
       - .env
+    restart: unless-stopped
+    networks:
+      - internal
+  cache:
+    image: redis:alpine
     restart: unless-stopped
     networks:
       - internal
