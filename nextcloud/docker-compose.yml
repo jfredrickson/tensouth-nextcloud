@@ -22,7 +22,7 @@ services:
     networks:
       - internal
   app:
-    image: nextcloud:fpm
+    build: ./app
     depends_on:
       - db
       - redis
@@ -57,3 +57,4 @@ services:
       - traefik.docker.network=reverse-proxy
       - traefik.frontend.headers.customFrameOptionsValue=SAMEORIGIN
       - traefik.frontend.headers.STSSeconds=15552000
+
