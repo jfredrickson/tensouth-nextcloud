@@ -19,5 +19,6 @@ Upon initial deployment, Nextcloud will be available at http://localhost:8020/. 
 
 ```
 docker-compose pull
+docker-compose build
 docker-compose up -d
 ```
