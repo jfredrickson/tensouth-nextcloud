@@ -17,8 +17,43 @@ Upon initial deployment, Nextcloud will be available at http://localhost:8020/. 
 
 ## Upgrading
 
+### Nextcloud updates
+
 ```
 docker-compose pull
 docker-compose build
 docker-compose up -d
+```
+
+### PostgreSQL upgrades
+
+Dump the data:
+
+```
+docker-compose run --rm db pg_dumpall -h db -U postgres > dump.sql
+```
+
+Stop the system:
+
+```
+docker-compose down
+```
+
+Delete the old data:
+
+```
+docker volume rm nextcloud_db
+```
+
+Proceed to upgrade the PostgreSQL version in `db/Dockerfile`, then build and run:
+
+```
+docker-compose build
+docker-compose up -d
+```
+
+Restore the data:
+
+```
+cat dump.sql | docker-compose run --rm db psql -h db -U postgres
 ```
