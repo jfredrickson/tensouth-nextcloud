@@ -65,5 +65,7 @@ cat dump.sql | docker-compose run --rm db psql -h db -U postgres
 Set `$BACKUP_LOCATION` to the host directory that will receive the backup, then:
 
 ```
-docker run --rm --volumes-from nextcloud_app_1 -v $BACKUP_LOCATION:/backup ubuntu bash -c "cd /var/www/html/data && tar cvf /backup/nextcloud.tar ."
+docker-compose exec -u www-data app /var/www/html/occ maintenance:mode --on
+docker run --rm --volumes-from nextcloud_app_1 -v $BACKUP_LOCATION:/backup ubuntu bash -c "cd /var/www/html && tar cvf /backup/nextcloud-data-$(date +%Y%d%m).tar data"
+docker-compose exec -u www-data app /var/www/html/occ maintenance:mode --off
 ```
