@@ -13,7 +13,7 @@ cd nextcloud
 docker-compose up -d
 ```
 
-Upon initial deployment, Nextcloud will be available at http://localhost:8020/. You will have to create a new admin account. The database connection information does not matter because it will be overridden by environment variables.
+Upon initial deployment, you will have to create a new admin account. The database configuration options on the setup page do not matter because they will be overridden by environment variables.
 
 ## Upgrading
 
