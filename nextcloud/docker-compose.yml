@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 volumes:
   app:
@@ -56,7 +56,7 @@ services:
       - traefik.http.routers.nextcloud.entrypoints=websecure
       - traefik.http.routers.nextcloud.tls=true
       - traefik.http.routers.nextcloud.tls.certResolver=letsencrypt
-      - traefik.http.routers.nextcloud.rule=Host(`nextcloud.tensouth.net`)
+      - traefik.http.routers.nextcloud.rule=Host(`${HOST}`)
       - traefik.http.routers.nextcloud.middlewares=nextcloud
       - traefik.http.middlewares.nextcloud.headers.customFrameOptionsValue=SAMEORIGIN
       - traefik.http.middlewares.nextcloud.headers.stsSeconds=15552000
