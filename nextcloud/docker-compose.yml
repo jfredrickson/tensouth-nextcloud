@@ -13,7 +13,7 @@ networks:
 
 services:
   db:
-    build: ./db
+    image: postgres:13
     volumes:
       - db:/var/lib/postgresql/data
     env_file:
@@ -30,6 +30,7 @@ services:
       - app:/var/www/html
     environment:
       - REDIS_HOST=redis
+      - POSTGRES_HOST=db
     env_file:
       - .env
     restart: unless-stopped

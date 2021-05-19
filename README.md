@@ -13,7 +13,7 @@ cd nextcloud
 docker-compose up -d
 ```
 
-Upon initial deployment, you will have to create a new admin account. The database configuration options on the setup page do not matter because they will be overridden by environment variables.
+Upon initial deployment, you will have to create a new admin account.
 
 ## Upgrading
 
