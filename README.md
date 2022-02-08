@@ -21,7 +21,7 @@ Upon initial deployment, you will have to create a new admin account.
 
 ```
 docker-compose pull
-docker-compose build
+docker-compose build --pull
 docker-compose up -d
 ```
 
