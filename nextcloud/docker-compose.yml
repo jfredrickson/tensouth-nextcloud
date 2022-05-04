@@ -8,8 +8,8 @@ networks:
   internal:
     external: false
   reverse-proxy:
-    external:
-      name: reverse-proxy
+    external: true
+    name: reverse-proxy
 
 services:
   db:
