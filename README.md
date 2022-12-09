@@ -25,12 +25,22 @@ docker-compose build --pull
 docker-compose up -d
 ```
 
+### Nextcloud upgrades
+
+Update the Nextcloud version in `app/Dockerfile`, then build and run:
+
+```
+docker-compose pull
+docker-compose build --pull
+docker-compose up -d
+```
+
 ### PostgreSQL upgrades
 
 Dump the data:
 
 ```
-docker-compose run --rm db pg_dumpall -h db -U postgres > dump.sql
+docker-compose exec db pg_dumpall -U nextcloud > dump.sql
 ```
 
 Stop the system:
@@ -45,17 +55,18 @@ Delete the old data:
 docker volume rm nextcloud_db
 ```
 
-Proceed to upgrade the PostgreSQL version in `db/Dockerfile`, then build and run:
+Proceed to upgrade the PostgreSQL version in `docker-compose.yml`, then pull and run:
 
 ```
-docker-compose build
+docker-compose pull
 docker-compose up -d
 ```
 
 Restore the data:
 
 ```
-cat dump.sql | docker-compose run --rm db psql -h db -U postgres
+docker-compose cp dump.sql db:/tmp/dump.sql
+docker-compose exec db psql -U nextcloud -f /tmp/dump.sql
 ```
 
 ## Backups
